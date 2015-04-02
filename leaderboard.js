@@ -9,7 +9,7 @@ if (Meteor.isClient) {
       return Session.get('counter');
     },
     player: function(){
-      return PlayersList.find();
+      return PlayersList.find({}, {sort:{score:-1, name: 1}});
     },
     'selectedClass': function(){
       var playerId = this._id;
@@ -29,12 +29,22 @@ if (Meteor.isClient) {
       Session.set('counter', Session.get('counter') + 1);
     },
     'click .player':function() {
-      console.log('you clicked!');
+      // console.log('you clicked!');
       var playerId = this._id;
       Session.set('selectedPlayer', playerId);
       // Session.set('selectedPlayer', this._id);
+      // var selectedPlayer = Session.get('selectedPlayer');
+      console.log(playerId);
+    },
+    'click .increment': function(){
       var selectedPlayer = Session.get('selectedPlayer');
       console.log(selectedPlayer);
+      PlayersList.update(selectedPlayer, {$inc: {score: 5}});
+    },
+    'click .decrement': function(){
+      var selectedPlayer = Session.get('selectedPlayer');
+      console.log(selectedPlayer);
+      PlayersList.update(selectedPlayer, {$inc: {score: -5}});
     }
   });
 }

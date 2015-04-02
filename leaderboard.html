@@ -13,9 +13,12 @@
 <template name="leaderboard">
 	<ul>
 		{{#each player}}
-			<li class='player {{selectedClass}}'>{{name}}: {{score}}</li>
+			<li class='player {{selectedClass}}'>{{name}}: {{score}}
+			</li>
 		{{/each}}
 	</ul>
+	<input type='button' class='increment' value='Give 5 points'/><br />
+	<input type='button' class='decrement' value='Remove 5 points'/><br />
 	<button>click me</button>
 	<p> Click count: {{counter}}</p>
 </template>
