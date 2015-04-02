@@ -20,6 +20,10 @@ if (Meteor.isClient) {
     },
     otherHelperFunction: function(){
       return "some other function";
+    },
+    showSelectedPlayer: function(){
+      var selectedPlayer = Session.get('selectedPlayer');
+      return PlayersList.findOne(selectedPlayer);
     }
   });
 

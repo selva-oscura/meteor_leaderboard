@@ -17,6 +17,9 @@
 			</li>
 		{{/each}}
 	</ul>
+	{{#if showSelectedPlayer}}
+		<p>Selected Player: {{showSelectedPlayer.name}}</p>
+	{{/if}}
 	<input type='button' class='increment' value='Give 5 points'/><br />
 	<input type='button' class='decrement' value='Remove 5 points'/><br />
 	<button>click me</button>
