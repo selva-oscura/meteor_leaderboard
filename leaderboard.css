@@ -1,7 +1,6 @@
-/* CSS declarations go here */
-.selected{
-	background-color: silver;
-}
+/*deprecated after shifting to client/stylesheets/style.css*/
 
-#leaderboard ul{
-}
+/* CSS declarations go here */
+/*.selected{
+	background-color: silver;
+}*/
