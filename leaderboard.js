@@ -7,7 +7,13 @@ if (Meteor.isClient) {
 
   Template.leaderboard.helpers({
     player: function(){
-      return PlayersList.find({}, {sort:{score:-1, name: 1}});
+      // deprecated  after creation of user accounts
+      // return PlayersList.find({}, {sort:{score:-1, name: 1}});
+      var currentUserId = Meteor.userId();
+      return PlayersList.find(
+        {createdBy: currentUserId}, 
+        {sort:{score:-1, name: 1}}
+      );
     },
     'selectedClass': function(){
       var playerId = this._id;
@@ -29,7 +35,7 @@ if (Meteor.isClient) {
       // console.log('you clicked!');
       var playerId = this._id;
       Session.set('selectedPlayer', playerId);
-      // Session.set('selectedPlayer', this._id);
+      // Session.set('selectedPlayer', this._meteorid);
       // var selectedPlayer = Session.get('selectedPlayer');
       // console.log(playerId);
     },
@@ -51,6 +57,7 @@ if (Meteor.isClient) {
 
 
   Template.updatePlayers.events({
+    // Original Version
     // 'submit form': function(event){
     //   event.preventDefault();
     //   var playerNameVar = event.target.playerName.value;
@@ -59,7 +66,7 @@ if (Meteor.isClient) {
     //     score: 0
     //   });
     // }
-
+    // Playing around with having multiple forms in one template (worked, but later switched to using the select and delete method as opposed to the )
     'submit #addPlayer': function(e){
       e.preventDefault();
       // console.log('form submitted');
@@ -68,10 +75,12 @@ if (Meteor.isClient) {
       // console.log(e.target);
       // console.log(e.target.playerName);
       var playerNameVar = e.target.playerName.value;
+      var currentUserId = Meteor.userId();
       console.log(playerNameVar);
       PlayersList.insert({
         name: playerNameVar,
-        score: 0
+        score: 0,
+        createdBy: currentUserId
       });
       e.target.playerName.value = "";
 

@@ -3,11 +3,12 @@
 </head>
 
 <body>
-  <h1>Leaderboard</h1>
-  {{> leaderboard}}
-  {{> updatePlayers}}
-  <hr>
-  {{> hello}}
+  	{{> loginButtons}}
+  	<h1>Leaderboard</h1>
+  	{{> leaderboard}}
+  	{{> updatePlayers}}
+  	<hr>
+  	{{> hello}}
 </body>
 
 <template name="leaderboard">
@@ -27,18 +28,21 @@
 </template>
 
 <template name='updatePlayers'>
-	<h3>Add a New Player to the Leaderboard</h3>
-	<form id='addPlayer'>
-		<input type='text' name='playerName' placeholder="New Player's Name">
-		<input type='submit' value='Add Player'>
-	</form>
-<!--   	<br>
-  	<h3>Remove Player from the Leaderboard</h3>
-  	<form id='deletePlayer'>
-  		<input type='text' name='playerName' placeholder='Player to Remove'>
-  		<input type='submit' value='Remove Player'>
-  	</form>
- --></template>
+	{{#if currentUser}}
+		<h3>Add a New Player to the Leaderboard</h3>
+		<form id='addPlayer'>
+			<input type='text' name='playerName' placeholder="New Player's Name">
+			<input type='submit' value='Add Player'>
+		</form>
+	<!--   	<br>
+	  	<h3>Remove Player from the Leaderboard</h3>
+	  	<form id='deletePlayer'>
+	  		<input type='text' name='playerName' placeholder='Player to Remove'>
+	  		<input type='submit' value='Remove Player'>
+	  	</form>
+	 -->
+	{{/if}}
+</template>
 
 <template name="hello">
 	<h3>Meteor's default stuff</h3>
