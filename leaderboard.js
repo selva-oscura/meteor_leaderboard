@@ -4,14 +4,22 @@ if (Meteor.isClient) {
   // counter starts at 0
   Session.setDefault('counter', 0);
 
+  Meteor.subscribe('thePlayers');
+  // thePlayers.find().fetch();
+  // PlayersList.find().fetch();
 
   Template.leaderboard.helpers({
     player: function(){
       // deprecated  after creation of user accounts
       // return PlayersList.find({}, {sort:{score:-1, name: 1}});
       var currentUserId = Meteor.userId();
+      // deprecated after adding publish and subscribe
+      // return PlayersList.find(
+      //   {createdBy: currentUserId}, 
+      //   {sort:{score:-1, name: 1}}
+      // );
       return PlayersList.find(
-        {createdBy: currentUserId}, 
+        {},
         {sort:{score:-1, name: 1}}
       );
     },
@@ -93,6 +101,8 @@ if (Meteor.isClient) {
     //   PlayersList.remove(playerRecord._id);
     //   e.target.playerName.value = "";
     // }
+
+
   });
 
   Template.hello.helpers({    
@@ -106,12 +116,19 @@ if (Meteor.isClient) {
       Session.set('counter', Session.get('counter') + 1);
     }    
   });
+
 }
 
 if (Meteor.isServer) {
   Meteor.startup(function () {
     // code to run on server at startup
-    console.log("Hello Server");
+    // console.log("Hello Server");
+    // console.log(PlayersList.find().fetch());
+    Meteor.publish('thePlayers', function(){
+      // return PlayersList.find().fetch();
+      var currentUserId = this.userId;
+      return PlayersList.find({createdBy: currentUserId});
+    })
   });
 }
 
