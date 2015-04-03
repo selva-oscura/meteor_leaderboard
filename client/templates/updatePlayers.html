@@ -1,0 +1,9 @@
+<template name='updatePlayers'>
+	{{#if currentUser}}
+		<h3>Add a New Player to the Leaderboard</h3>
+		<form id='addPlayer'>
+			<input type='text' name='playerName' placeholder="New Player's Name">
+			<input type='submit' value='Add Player'>
+		</form>
+	{{/if}}
+</template>
