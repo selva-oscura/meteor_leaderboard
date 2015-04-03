@@ -5,12 +5,13 @@
 <body>
   <h1>Leaderboard</h1>
   {{> leaderboard}}
+  {{> updatePlayers}}
+  <hr>
+  {{> hello}}
 </body>
 
-<template name="hello">
-</template>
-
 <template name="leaderboard">
+	<p>Click on a player to give points, remove points, or remove player</p>
 	<ul>
 		{{#each player}}
 			<li class='player {{selectedClass}}'>{{name}}: {{score}}
@@ -20,8 +21,27 @@
 	{{#if showSelectedPlayer}}
 		<p>Selected Player: {{showSelectedPlayer.name}}</p>
 	{{/if}}
-	<input type='button' class='increment' value='Give 5 points'/><br />
-	<input type='button' class='decrement' value='Remove 5 points'/><br />
+	<input type='button' class='increment' value='Give 5 points'/>  &nbsp; &nbsp;
+	<input type='button' class='decrement' value='Remove 5 points'/> &nbsp; &nbsp;
+	<input type='button' class='removePlayer' value='Remove Player'/><br />
+</template>
+
+<template name='updatePlayers'>
+	<h3>Add a New Player to the Leaderboard</h3>
+	<form id='addPlayer'>
+		<input type='text' name='playerName' placeholder="New Player's Name">
+		<input type='submit' value='Add Player'>
+	</form>
+<!--   	<br>
+  	<h3>Remove Player from the Leaderboard</h3>
+  	<form id='deletePlayer'>
+  		<input type='text' name='playerName' placeholder='Player to Remove'>
+  		<input type='submit' value='Remove Player'>
+  	</form>
+ --></template>
+
+<template name="hello">
+	<h3>Meteor's default stuff</h3>
 	<button>click me</button>
-	<p> Click count: {{counter}}</p>
+	<p> Click count: {{counter}}</p>	
 </template>
